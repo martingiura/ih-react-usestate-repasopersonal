@@ -1,24 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState } from "react";
 
 function App() {
+  // A. SE DEFINE UN NUEVO COMENTARIO EN EL FORMULARIO
+  const [comentario, setComentario] = useState({
+    title: "",
+    description: "",
+  });
+
+  //B SE DEFINE EL LISTADO DE TODOS LOS COMENTARIOS DE LA APLICACION
+  const [listadoComentarios, setListadoComentarios] = useState([]);
+
+  //2. FUNCIONES DEL COMPONENTE
+
+  const generarMensaje = (event) => {
+    return console.log("Hola Mundo");
+  };
+
+  const capturarDatos = (e) => {
+    return setComentario({
+      ...comentario,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // CRUD
+  //CREAR
+
+  const agregarComentario = (e) => {
+    e.preventDefault();
+
+    setListadoComentarios([...listadoComentarios, comentario]);
+
+    setComentario({
+      title: "",
+      description: "",
+    });
+  };
+
+  // RETORNO DEFINIDO AQUI
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <button onClick={() => generarMensaje()}> Crear mensaje</button>
+      <hr />
+      <h2> Crea tu comentario</h2>
+    </>
   );
 }
 
